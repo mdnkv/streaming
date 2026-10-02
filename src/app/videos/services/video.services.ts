@@ -3,7 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
-import { CreateVideoRequest, VideoMetadataResponse } from '../models/videos.models';
+import {
+  CreateVideoRequest,
+  UploadVideoRequest, UploadVideoResponse,
+  VideoMetadataResponse
+} from '../models/videos.models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +18,14 @@ export class VideoService {
 
   createVideo(payload: CreateVideoRequest): Observable<VideoMetadataResponse>{
     return this.http.post<VideoMetadataResponse>(`${this.serverUrl}/videos`, payload)
+  }
+
+  getUploadUrl (payload: UploadVideoRequest): Observable<UploadVideoResponse> {
+    return this.http.post <UploadVideoResponse>(`${this.serverUrl}/upload`, payload)
+  }
+
+  uploadFile (url: string, data: FormData): Observable<void>{
+    return this.http.post<void>(url, data)
   }
 
 }

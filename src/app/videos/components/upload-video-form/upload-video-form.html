@@ -1,0 +1,9 @@
+<div class="is-flex is-flex-direction-row is-justify-content-center is-align-content-center">
+  <button matFab (click)="fileInput.click()">
+    <mat-icon>upload</mat-icon>
+  </button>
+</div>
+
+<div class="is-hidden">
+  <input type="file" #fileInput (change)="doUpload($event)">
+</div>

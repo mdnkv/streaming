@@ -16,3 +16,12 @@ export interface VideoVisibility {
   displayedName: string
   value: string
 }
+
+export interface UploadVideoRequest {
+  videoId: string
+  originalFilename: string
+}
+
+export interface UploadVideoResponse {
+  uploadUrl: string
+}

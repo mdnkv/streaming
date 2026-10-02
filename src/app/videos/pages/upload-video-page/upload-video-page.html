@@ -1,0 +1,16 @@
+<div class="section">
+  <div class="container">
+    <div class="block">
+      <p class="title is-3">Upload video</p>
+
+      @if (uploadVideoStore.isUploading()){
+        <!-- uploading indicator -->
+        <app-upload-video-progress/>
+      } @else {
+        <!-- form -->
+        <app-upload-video-form [videoId]="videoId()"/>
+      }
+
+    </div>
+  </div>
+</div>
