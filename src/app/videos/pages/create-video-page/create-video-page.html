@@ -1,0 +1,81 @@
+<div class="section">
+  <div class="container">
+
+    <div class="block">
+      <p class="title is-3">Create new video</p>
+    </div>
+
+    <form [formGroup]="createVideoForm" (submit)="submit()">
+
+      <mat-form-field>
+        <mat-label>Video title</mat-label>
+        <input formControlName="title" matInput>
+        @if (createVideoForm.get('title')?.touched && createVideoForm.get('title')?.hasError('required') ) {
+          <mat-error>This field cannot be blank</mat-error>
+        }
+        @if (createVideoForm.get('title')?.touched && createVideoForm.get('title')?.hasError('maxlength') ) {
+          <mat-error>This field cannot exceed 255 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Visibility</mat-label>
+        <mat-select formControlName="visibility">
+          @for (vt of VideoVisibilityTypes; track $index) {
+            <mat-option [value]="vt.value">{{vt.displayedName}}</mat-option>
+          }
+        </mat-select>
+        @if (createVideoForm.get('visibility')?.touched && createVideoForm.get('visibility')?.invalid ){
+          <mat-error>This field cannot be blank</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Video description</mat-label>
+        <input formControlName="description" matInput>
+        @if (createVideoForm.get('description')?.touched && createVideoForm.get('description')?.hasError('required') ) {
+          <mat-error>This field cannot be blank</mat-error>
+        }
+        @if (createVideoForm.get('description')?.touched && createVideoForm.get('description')?.hasError('maxlength') ) {
+          <mat-error>This field cannot exceed 500 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="app-bottom-bar">
+        <div class="level is-mobile">
+          <div class="level-left"></div>
+          <div class="level-right">
+            <div class="level-item">
+
+              <!-- Buttons -->
+              <div class="buttons">
+                <button
+                  matButton="filled"
+                  type="submit"
+                  [showProgress]="createVideoStore.formLoading()"
+                  [disabled]="createVideoForm.invalid">
+                  <span>Create</span>
+                  <mat-progress-spinner
+                    progressIndicator
+                    mode="indeterminate"
+                    diameter="20"
+                  />
+                </button>
+                <button
+                  matButton
+                  type="button"
+                  [disabled]="createVideoStore.formLoading()"
+                  (click)="cancel()">Cancel</button>
+              </div>
+
+              <!-- -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</div>
